@@ -208,7 +208,7 @@ $ unset PATH
 First, compile the `slowcat.c` file:
 
 ```bash
-$
+$ cd codes/01-compile
 $ gcc slowcat.c -o slowcat
 $ file slowcat
 slowcat: ELF 64-bit LSB executable
