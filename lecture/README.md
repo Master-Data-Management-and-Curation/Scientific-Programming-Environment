@@ -370,7 +370,7 @@ $ sudo make install
 ### Uninstall and Rebuild Nano
 
 Uninstall `nano` from your system, then rebuild and reinstall it from source.
-Here the source code: (git)[https://savannah.gnu.org/git/?group=nano]
+Here the source code: [git](https://savannah.gnu.org/git/?group=nano)
 
 ### Introduction to HDF5 Files
 
@@ -395,10 +395,11 @@ Starting point:
 ```bash
 $ git clone https://github.com/HDFGroup/hdf5.git
 $ cd hdf5 && git checkout 1.14.1
-```
+`****
 
 Follow the instructions to build and install the HDF5 toolset.
 
+*Super advanced exercise*(optional): `h5tools` also has a Cmake based build system, try to use it !
 ### Useful Packages
 
 Depending on your system, you may need to install the following packages to compile software:
