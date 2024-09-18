@@ -237,7 +237,7 @@ $ sudo cp slowcat /usr/local/bin/
 If you lack `sudo` privileges, update your `PATH` variable so the OS knows where to find the `slowcat` command:
 
 ```bash
-$ exporppt PATH=$(pwd):$PATH
+$ export PATH=$(pwd):$PATH
 $ which slowcat
 /home/user/slowcat
 ```
@@ -406,5 +406,5 @@ Follow the instructions to build and install the HDF5 toolset.
 Depending on your system, you may need to install the following packages to compile software:
 
 ```bash
-sudo apt install build-essential autoreconf autoconf automake autopoint pkgconf gettext libncurses-dev texinfo
+sudo apt install build-essential autoconf automake autopoint pkgconf gettext libncurses-dev texinfo
 ```
