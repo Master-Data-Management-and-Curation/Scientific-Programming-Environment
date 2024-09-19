@@ -72,7 +72,7 @@ Now, you can log in to ORFEO simply by typing:
 $ ssh orfeo
 ```
 
-**Exercise**: Set up your SSH configuration to use the above format for logging in. Use this syntax to copy files with `scp`. Finally, set up 2 hosts, but changing the private key, and test them. 
+**Exercise**: Set up your SSH configuration to use the above format for logging in. Use this syntax to copy files with `scp`. Finally, set up 2 hosts, but changing the private key, and test them. l
 
 ## Port Forwarding
 
@@ -81,7 +81,7 @@ If you're running a service on a remote machine (e.g., JupyterLab, web server), 
 On the remote machine, run:
 
 ```
-$ git clone git@github.com:Master-Data-Management-and-Curation/Scientific-Programming-Environment.git
+$ git clone https://github.com/Master-Data-Management-and-Curation/Scientific-Programming-Environment.git
 $ cd Scientific-Programming-Environment/codes/04-forwarding
 $ python3 -m http.server 0
 ```
