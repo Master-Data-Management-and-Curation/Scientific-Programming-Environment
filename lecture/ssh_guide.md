@@ -55,19 +55,12 @@ To avoid typing your username, IP address, and private key path every time, you 
 
 ```
 $ cat ~/.ssh/config
-
 AddKeysToAgent=yes
-
 host *
-
   SetEnv TERM=xterm
-
 host orfeo
-
  Hostname 195.14.102.215
-
  User your_username
-
  IdentityFile path_to_your_private_key
 ```
 
@@ -102,7 +95,7 @@ You can now access the service by opening a browser and going to `http://127.0.0
 
 ## Jump-Box (Jump Host)
 
-Our cluster’s compute nodes can only be accessed via the login node since they are on a private network. To log in to a compute node from your local machine, you need to go through the login node. Use the `-J` flag to achieve this:
+Our cluster’s compute nodes can only be accessed via the login node since they are on a private network. To log in to a compute node, with ip address `10.128.2.171` from your local machine, you need to go through the login node. Use the `-J` flag to achieve this:
 
 ```
 $ ssh username@10.128.2.171 -J orfeo
@@ -111,3 +104,19 @@ $ ssh username@10.128.2.171 -J orfeo
 **Exercise**: Try logging in to a compute node without using the jump box.
 
 --- 
+
+## `scp` exercise 
+
+To complete this exercise, we will work with two computational nodes, with IP addresses 10.128.2.171 and 10.128.2.175.
+
+1. **Log in** to the computational node at IP 10.128.2.171 and create a file named `username_file1` in the directory `/local_scratch`.
+
+2. Return to the login node, and use the `scp` command to securely copy the file `username_file1` from the node 10.128.2.171 to the node 10.128.2.175, placing it in the `/local_scratch` directory. Use only one instance of `scp`.
+
+3. **Verify** the file transfer by copying `username_file1` from node 10.128.2.175 to your home directory on the login node.
+
+4. Lastly, copy the file from the login node to your personal laptop.
+
+
+
+
