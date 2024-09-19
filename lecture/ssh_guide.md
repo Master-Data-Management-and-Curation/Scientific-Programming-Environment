@@ -70,7 +70,7 @@ Now, you can log in to ORFEO simply by typing:
 $ ssh orfeo
 ```
 
-**Exercise**: Set up your SSH configuration to use the above format for logging in.
+**Exercise**: Set up your SSH configuration to use the above format for logging in. Use this syntax to copy files with `scp`.
 
 ## Port Forwarding
 
