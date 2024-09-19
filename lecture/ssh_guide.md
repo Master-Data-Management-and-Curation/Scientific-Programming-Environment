@@ -81,17 +81,19 @@ On the remote machine, run:
 ```
 $ git clone git@github.com:Master-Data-Management-and-Curation/Scientific-Programming-Environment.git
 $ cd Scientific-Programming-Environment/codes/04-forwarding
-$ python3 -m http.server
+$ python3 -m http.server 0
 ```
 Doing that you just started an http server runngin on the login node.
 
 On your local machine, forward the port:
 
 ```
-$ ssh -L 8000:127.0.0.1:8000 orfeo
+$ ssh -L 8000:127.0.0.1:{write here the remote port number} orfeo
 ```
 
-You can now access the service by opening a browser and going to `http://127.0.0.1:8000/`.
+You can now access the service by opening a browser and going to `http://127.0.0.1:8000/**.
+
+*Hint*: `tmux` could be usefull in this exercise.
 
 ## Jump-Box (Jump Host)
 
@@ -116,7 +118,4 @@ To complete this exercise, we will work with two computational nodes, with IP ad
 3. **Verify** the file transfer by copying `username_file1` from node 10.128.2.175 to your home directory on the login node.
 
 4. Lastly, copy the file from the login node to your personal laptop.
-
-
-
 
