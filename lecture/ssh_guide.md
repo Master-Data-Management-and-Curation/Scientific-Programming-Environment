@@ -36,6 +36,8 @@ If you need to generate a new key pair, log in to the ORFEO cluster and add the 
 
 Navigate to `~/.ssh` and append your public key to the `authorized_keys` file on a new line.
 
+*Exercise*: Generate a new pair, enable it on ORFEO and use it to login. Verify using `-v` flag wich key ssh is really using. 
+
 ## Transferring Files
 
 You can transfer files between your local machine and the remote machine using SSH.
@@ -70,7 +72,7 @@ Now, you can log in to ORFEO simply by typing:
 $ ssh orfeo
 ```
 
-**Exercise**: Set up your SSH configuration to use the above format for logging in. Use this syntax to copy files with `scp`.
+**Exercise**: Set up your SSH configuration to use the above format for logging in. Use this syntax to copy files with `scp`. Finally, set up 2 hosts, but changing the private key, and test them. 
 
 ## Port Forwarding
 
