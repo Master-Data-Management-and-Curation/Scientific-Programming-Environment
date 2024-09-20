@@ -46,7 +46,7 @@ To copy a file to the ORFEO cluster:
 
 ```
 $ touch file_to_copy
-$ scp file_to_copy username@195.14.192.215:~
+$ scp file_to_copy username@195.14.102.215:~
 ```
 
 **Exercise**: Try copying a file to the cluster, log in to verify the transfer, then reverse the process by copying a file from the cluster to your local machine. Repeat this exercise with a folder.
