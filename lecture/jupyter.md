@@ -1,6 +1,6 @@
 # Jupyter lab installation
 
-Prerequisites: have a port forwarding working from your VM to your laptop.
+Prerequisites: have a port forwarding working from your VM to your laptop with a proper config file.
 
 ## Create virtual environment
 
@@ -9,7 +9,7 @@ $ python3 -m venv jupyter_environment
 $ source jupyter_environment/bin/activate
 ```
 
-## Install jupyter lab 
+## Install jupyter lab
 
 ```
 $ python3 -m pip install jupyter
@@ -19,7 +19,7 @@ $ python3 -m pip install jupyter
 
 Do this inside a tmux session:
 ```
-$ tmux 
+$ tmux
 $ jupyter lab
 ```
 
@@ -32,3 +32,13 @@ And connect from you browser to the url suggested by jupyter lab:
      or http://127.0.0.1:8888/lab?token=aa84abc...
 
 ```
+
+## Open a sample jupyter notebook
+
+Download this repository:
+
+```
+$ git clone 
+```
+
+You will find the notebook on this folder: `Scientific-Programming-Environment/codes/05-jupyterlab/` . 
