@@ -20,7 +20,7 @@ $ python3 -m pip install jupyter
 Do this inside a tmux session:
 ```
 $ tmux
-$ jupyter lab
+$ jupyter lab --port=8000
 ```
 
 And connect from you browser to the url suggested by jupyter lab:
