@@ -199,7 +199,7 @@ Forward remote service `localhost:8080` (on the remote machine) to your local po
 ssh -L 8080:localhost:8080 username@195.14.102.215
 ```
 
-![SSh](../assets/ssh.png)
+![SSh](../assets/tunnel.png)
 
 **Exercise**: on ORFEO start a webserver with python `python3 -m http.server <portnumber>` and try to access it from your local machine using the browser and using `wget`/`curl`.
 
