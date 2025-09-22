@@ -62,7 +62,50 @@ ls -a
 
 * The special entries `.` (current directory) and `..` (parent directory) are also shown with `ls -l`.
 
-### Create a folder
+**Exercise** Inspect the hidden folder and files in your home folder.
+
+## Handling files - Copy / Move / Delete
+
+#### Copy 
+
+Files:
+
+```bash
+cp source.txt destination.txt
+```
+
+Copy a files into a folder:
+
+```bash
+cp source.txt ~/Documents/
+```
+
+Copy a whole directory:
+
+```bash
+cp -r project/ backup_project/
+```
+
+#### Move
+
+Move a file to another folder:
+
+```bash
+mv notes.txt ~/Documents/
+```
+
+Rename a file:
+```bash
+mv oldname.txt newname.txt
+```
+
+Move a directory:
+
+```bash
+mv project/ ~/ProjectsArchive/
+```
+
+#### Create a folder
 
 To create a new folder you will use `mkdir` command.
 ```bash
@@ -77,10 +120,47 @@ mkdir /home/user001/newfolder
 
 This require that `/home/user001` exists, you can use the flag `-p` that create for you the parent directories if necessary.
 
+#### Delete
+
+**Note** there are no recycle bin, once deleted file are gone.
+
+A single file:
+```bash
+rm file.txt
+
+```
+
+Multiple files
+```bash
+rm file1.txt file2.txt
+
+```
+Using a wildcard:
+
+```bash
+rm *.log
+
+```
+
+A folder:
+```bash
+rm -r old_project/
+```
+
+### Tip
+
+If you are unsure about what you are doing or you need with very important data, use the flag `-i`.
+
+```
+rm -i file.txt   # asks before deleting
+mv -i file.txt folder/
+cp -i file.txt folder/
+```
 
 ---
 
-### Basic commands
+## 1 - Basics
+
 This is a list of command that you need to know and master at the end of the module:
 
 * `touch` - Create an empty file
@@ -98,10 +178,6 @@ This is a list of command that you need to know and master at the end of the mod
 * `man <command>` - open manual page
 * `<command> -h` or `--help` - quick help
 
----
-
-## 1 - Basics
-
 ### Create an empty file
 
 ```bash
@@ -115,6 +191,17 @@ Output:
 total 0
 -rw-r--r-- 1 user user 0 Sep 19 21:14 empty_file
 ```
+
+**Exercise** Create the following structure:
+```bash
+exercise
+├── folder1
+│   └── file1
+└── folder2
+    └── file2
+```
+Do that in your home, never move from your home ! `file1` and `file2` are empty file.
+Verify the result with `tree exercise`, the output should match the one above.
 
 ---
 

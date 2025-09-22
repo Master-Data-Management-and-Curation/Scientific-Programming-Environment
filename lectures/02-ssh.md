@@ -92,6 +92,10 @@ ssh -i my_custom_key username@195.14.102.215
 
 ---
 
+## Fingerprint
+
+---
+
 ## Configuring SSH
 
 Typing your username, IP address, and key path every time is inconvenient. You can simplify this with an SSH configuration file.
@@ -196,6 +200,8 @@ Forward remote service `localhost:8080` (on the remote machine) to your local po
 ssh -L 8080:localhost:8080 username@195.14.102.215
 ```
 
+![SSh](../assets/ssh.png)
+
 **Exercise**: on ORFEO start a webserver with python `python3 -m http.server <portnumber>` and try to access it from your local machine using the browser and using `wget`/`curl`.
 
 Use `-N` to run SSH without an interactive shell (only forwarding) and `-f` to put it in the background:
@@ -236,6 +242,10 @@ ssh -J user_jump@jump_host youruser@orfeo
 - `target_user@target_host`  the final server you want to reach.
 
 SSH automatically connects to the jump host and then forwards traffic to the target host.
+
+
+![SSh](../assets/ssh.png)
+
 
 ### Config file shortcut
 

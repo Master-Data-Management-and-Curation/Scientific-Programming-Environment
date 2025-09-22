@@ -1,95 +1,5 @@
-# File systems and tools
-
-## Copy / Move / Delete
-
-### Copy 
-
-Files:
-
-```bash
-cp source.txt destination.txt
-```
-
-Copy a files into a folder:
-
-```bash
-cp source.txt ~/Documents/
-```
-
-Copy a whole directory:
-
-```bash
-cp -r project/ backup_project/
-```
-
-### Move
-
-Move a file to another folder:
-
-```bash
-mv notes.txt ~/Documents/
-```
-
-Rename a file:
-```bash
-mv oldname.txt newname.txt
-```
-
-Move a directory:
-
-```
-mv project/ ~/ProjectsArchive/
-```
-
-### `rsync`
-
-`cp` is nice for small file transfer and every day docs, but with large amount of data, when metadata, file integrity, performance matter, `rsync` is a better solution.
-
-```bash
-rsync -av source/ destination/
-```
-
-Could show you what will happen with `--dry-run `  flag, could preserve metadata with `-a` and show what is happening with `-v`.
-
-You could use it to keep synced 2 directory using `--delete ` (dangerous) and show the progress `--progress`.
-
-### Delete
-
-**Note** there are no recycle bin, once deleted file are gone.
-
-A single file:
-```bash
-rm file.txt
-
-```
-
-Multiple files
-```bash
-rm file1.txt file2.txt
-
-```
-Using a wildcard:
-
-```
-rm *.log
-
-```
-
-A folder:
-```
-rm -rf old_project/
-
-```
-
-### Tip
-
-If you are unsure about what you are doing or you need with very important data, use the flag `-i`.
-
-```
-rm -i file.txt   # asks before deleting
-mv -i file.txt folder/
-cp -i file.txt folder/
-```
+# File and tools
+## Everything about files
 
 ### `stat` and `file`
 
@@ -190,13 +100,14 @@ chmod o=r file.txt    # set others to read only
 chmod a+rw folder     # everyone can read/write
 ```
 
-### Exercise on permisison
+### Exercise on permissions
+Save the following script in a file called `setup_exercise.sh`, then run it `sudo setup_exercise.sh`. It require `root` privileges to run, since it will add a new user. 
 
 ```bash
 #!/bin/bash
 # setup.sh - run as root
 # 1. Create a new user
-useradd -m student01
+useradd -m -s /bin/bash student01
 # 2. Create a directory structure in the new user's home
 mkdir -p /home/student01/projects
 mkdir -p /home/student01/projects/src
@@ -213,13 +124,71 @@ chmod 600 /home/student01/projects/src/
 echo "Setup complete. Log in as student01 to fix permissions."
 ```
 
-Login as `studnet01` and fix the permissions.
+This script will generate the following structure:
+```bash
+/home/student01/
+└── projects
+    ├── file1.txt
+    └── src
+        └── file2.txt
+```
 
+**Goal** be able as `student01` user to read `file1.txt`,`file2.txt`, access folders and do `ls`.
 
-## `tmux`
+**Tasks**
+* Login as `student01`, you can do `sudo su - student01`, this allow you to impersonate a new user.  Verify that using the command `id` and `whoami` . You should be `student01` and not the usual one.
+* Try as `student01` to do `ls /home/student01/projects/src`, you should get an error.
+* Open a **new terminal** and login as root: `sudo su`, then fix the permission in order to allow `student01` to acces its files.  In other words, `student01` should be able to do anything inside its home and `projects` folder.
 
-Copy from past year
+### `rsync` to move files
 
+`cp` is nice for small file transfer and every day docs, but with large amount of data, when metadata, file integrity, performance matter, `rsync` is a better solution.
+
+```bash
+rsync -av source/ destination/
+```
+
+Could show you what will happen with `--dry-run `  flag, could preserve metadata with `-a` and show what is happening with `-v`.
+
+You could use it to keep synced 2 directory using `--delete ` (dangerous) and show the progress `--progress`.
+
+**Exercise** try `rsync` to copy 2 folder.
+
+## Terminal Multiplexer `tmux`
+
+Suppose you have a script that runs indefinitely:
+
+```shell
+sleep 12345
+```
+
+How do you keep its output accessible even after closing the shell? Use `tmux`:
+
+1. Create a new session: `tmux new -s session_name`
+2. Run your script.
+3. Detach from the session: `Ctrl+b d`
+4. List active sessions: `tmux ls`
+5. Reattach to the session: `tmux attach -t session_name`
+### Bonus features:
+
+[](https://github.com/Master-Data-Management-and-Curation/Scientific-Programming-Environment/tree/main/lecture#bonus-features)
+
+- Split the screen: `Ctrl+b "` or `Ctrl+b %`
+- Close a panel: `Ctrl+b x`
+- Scroll within a pane: `Ctrl+b [`
+
+### Share Your Terminal with Friends
+
+```bash
+tmux -S /tmp/shared_session_socket
+chmod 777 /tmp/shared_session_socket
+tmux server-access -a friend_username
+```
+Your friend can then join with:
+
+```bash
+tmux -S /tmp/shared_session_socket
+```
 ## Search for files and directories
 If you need to search for a specific file/folder, or an object that match some metadata, `find` is the right tool:
 
