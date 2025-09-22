@@ -610,5 +610,3 @@ Usually messing up with this varialbe could lead to broken interactive shell. It
 **Exercise** : 
 - try to break your interactive shell by corrupting PATH (not in the `.bashrch`)
 - try to personalize your shell using `PS1`variable
-
-

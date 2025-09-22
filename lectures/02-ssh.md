@@ -87,8 +87,9 @@ ssh -i my_custom_key username@195.14.102.215
 **Exercise:**
 
 - Run with `-vvv` to see detailed logs of the SSH process.
-- Generate a new key pair, try connecting, and observe what happens if the server doesn’t know your public key.
-- Copy your key to a different location and connect using `-i`.
+- Generate a new key pair, try connecting using the wrong key, and observe what happens if the server doesn’t know your public key.
+- Copy your correct key to a different location and connect using `-i`.
+- Change the permission of your key and try to connect to Orfeo.
 
 ---
 
@@ -130,8 +131,6 @@ To allow another key, simply add its **public key** as a new line in that file.
 **Warning:**  
 Do not overwrite or delete your existing key in `authorized_keys`, or you might lock yourself out!
 
---- 
-Nice — I fixed and finished both sections. I corrected grammar, clarified commands and options, added useful tips and exercises, and completed the port-forwarding section with practical examples.
 
 ---
 ### Copy files
@@ -188,7 +187,7 @@ scp user1@hostA:/path/to/file user2@hostB:/path/to/destination
 ---
 ### Forwarding
 
-SSH can forward ports so you can securely access services on a remote machine (or on your local machine) that are otherwise unreachable. There are three common types of forwarding:
+SSH can forward ports so you can securely access services on a remote machine (or on your local machine) that are otherwise unreachable. There are two common types of forwarding:
 
 1. **Local forwarding** (`-L`)  forward a local port to a remote address/port through the SSH server.
 2. **Remote forwarding** (`-R`)  forward a remote port to a local address/port.
@@ -235,11 +234,11 @@ Sometimes, the machine you want to reach is **not directly accessible** from you
 SSH can **tunnel through an intermediate server** using the `-J` flag.
 
 ```bash
-ssh -J user_jump@jump_host youruser@orfeo
+ssh -J your_username@10.128.2.171 your_username@195.14.102.215
 ```
 
-- `youruser@orfeo`  the jump/bastion server you can connect to directly.
-- `target_user@target_host`  the final server you want to reach.
+- `youruser@195.14.102.215`  the jump/bastion server you can connect to directly.
+- `your_username@10.128.2.171`  the final server you want to reach, in this case a compute node. 
 
 SSH automatically connects to the jump host and then forwards traffic to the target host.
 
@@ -252,22 +251,19 @@ SSH automatically connects to the jump host and then forwards traffic to the tar
 You can simplify it in `~/.ssh/config`:
 
 ```text
-Host jump
-  HostName jump.example.com
-  User alice
-  IdentityFile ~/.ssh/id_jump
 
-Host internal
-  HostName internal.example.com
-  User alice
-  IdentityFile ~/.ssh/id_target
-  ProxyJump jump
+
+Host compute_node
+  HostName 10.128.2.171
+  User your_username
+  IdentityFile ~/.ssh/id_rsa
+  ProxyJump orfeo
 ```
 
 Now you can just run:
 
 ```bash
-ssh internal
+ssh compute_node
 ```
 
 and SSH will automatically use the jump host.
