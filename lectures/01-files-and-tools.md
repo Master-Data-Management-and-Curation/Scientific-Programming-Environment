@@ -171,8 +171,6 @@ How do you keep its output accessible even after closing the shell? Use `tmux`:
 5. Reattach to the session: `tmux attach -t session_name`
 ### Bonus features:
 
-[](https://github.com/Master-Data-Management-and-Curation/Scientific-Programming-Environment/tree/main/lecture#bonus-features)
-
 - Split the screen: `Ctrl+b "` or `Ctrl+b %`
 - Close a panel: `Ctrl+b x`
 - Scroll within a pane: `Ctrl+b [`
@@ -197,6 +195,9 @@ If you need to search for a specific file/folder, or an object that match some m
 find . -name "file.txt"
 find . -iname "file.txt" #case insesitive version
 ```
+
+**Tip**: it could be that during a find you end up in several `Permission denied`. That message could pollute your stdoutput, so you can filter errors using the following: `2>/dev/null`.
+
 - Find only files or directories
 ```bash
 find . -type d -name "backup"
@@ -218,7 +219,6 @@ find . -type f -name "*.tmp" -exec rm {} \;
 find . -type f -name "*.sh" -exec ls -l {} \;
 ```
 ( `{}` is replaced with the filename, and `\;` ends the `-exec` command. )
-
 
 ---
 
