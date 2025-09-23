@@ -610,3 +610,16 @@ Usually messing up with this varialbe could lead to broken interactive shell. It
 **Exercise** : 
 - try to break your interactive shell by corrupting PATH (not in the `.bashrch`)
 - try to personalize your shell using `PS1`variable
+### History
+
+You can query past commands typed in your bash shell using the `history` command and analyze its output to *stdout*.
+
+You can search from the CLI on history using `ctrl+r` and typing a command:
+
+```bash
+(reverse-i-search)`mk': mkdir afolder
+```
+
+The bash history is stored in a text file in your home (usually, it can be checked by logging in at the variable `HISTFILE`).
+
+**Exercise** Search where your history is stored and delete some commands. 

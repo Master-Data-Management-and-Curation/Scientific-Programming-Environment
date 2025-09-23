@@ -244,6 +244,32 @@ Now someone on the remote host can access `http://localhost:9000` and reach your
 **Exercise** start a local web server, as above, but in your machine, the check it correct functionality with `curl`/`wget`. 
 
 ---
+
+### Practical example with forwarding - Jupyter notebook
+
+The goal is to have a jupyter notebook up and running on a remote machine (we will exploit ORFEO login node). And connect using our browser.
+
+**Tasks**:
+- Connect to ORFEO
+- Create a python virtual environment `python3 -m venv myenvironment`. On the next lectures we will depict this command.
+- Activate the virtual env `source myenvironment/bin/activate`
+- Install jupyter lab `pip install jupyterlab`
+- Start a notebook with `jupyter lab`
+- Then a link should appear: 
+  ```bash
+     To access the server, open this file in a browser:
+        ...
+    Or copy and paste one of these URLs:
+        http://localhost:8888/lab?token=d3a866986d6437731ca2d758a674da599d
+        http://127.0.0.1:8888/lab?token=d3a866986d6437731ca2d758a674da599d  ```
+
+This link will not work on your laptop ! 
+You need to establish an SSH tunnel in order to reach port 8888 in the login node. 
+**Exercise**: do it as exercise ! 
+
+
+---
+
 ## SSH Jump Host (`-J`)
 
 Sometimes, the machine you want to reach is **not directly accessible** from your local computer. It may be behind a firewall or only reachable from another machine (the **jump host** or **bastion host**).
@@ -268,8 +294,6 @@ SSH automatically connects to the jump host and then forwards traffic to the tar
 You can simplify it in `~/.ssh/config`:
 
 ```text
-
-
 Host compute_node
   HostName 10.128.2.171
   User your_username

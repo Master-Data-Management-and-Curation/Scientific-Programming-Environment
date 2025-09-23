@@ -242,7 +242,7 @@ wget https://example.com/file.zip
 wget -O my_file.zip https://example.com/file.zip
 ```
 
-- `-r -np -k` → Download a website recursively:
+- `-r -np -k` - Download a website recursively:
 ```bash
 wget -r -np -k https://example.com/subpage/
 ```
@@ -263,7 +263,7 @@ curl -O https://example.com/file.zip
 
 **Other useful options**
 
-- `-L` → Follow redirects: 
+- `-L` - Follow redirects: 
 
 ```bash
 curl -L -O https://example.com/redirected_file.zip
