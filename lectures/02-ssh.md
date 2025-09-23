@@ -95,6 +95,23 @@ ssh -i my_custom_key username@195.14.102.215
 
 ## Fingerprint
 
+The first time that you connect to an host you have to accept its fingerprint. 
+
+```bash
+The authenticity of host 'x.x.x.x (x.x.x.x)' can't be established.
+ED25519 key fingerprint is SHA256:l/+VX7zyl8asdfsadfeggerergergf0vqAB9w.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+
+If something in the remote host changes (OS, hostname, etc.), its fingerprint consequently changes. This is crucial for security reasons, as it helps avoid a man-in-the-middle attack. Checking the fingerprint is fundamental to preventing that.
+
+The list of all fingerprints is usually stored in `.ssh/known_hosts`. If the fingerprint stored here and the one provided by the host do not match, SSH stops you from logging in.
+
+If this is expected, for instance, after an update, you need to remove the old fingerprint and accept a new one. To do this, you can use the following command: `ssh-keygen -R <host-address>`.
+
+**Exercise**: delete the ORFEO fingerprint, and accept a new one. Do it before deleting manually from `known_hosts`, repeat the exercise by using the command `ssh-keygen -R`.
+
 ---
 
 ## Configuring SSH
