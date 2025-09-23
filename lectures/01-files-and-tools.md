@@ -19,6 +19,8 @@ Change: 2025-09-19 18:35:00
 
 ```
 
+**Exercise**: use the `touch` command to modify a file’s access time (`atime`) and modification time (`mtime`), then run `stat` to observe the changes.
+
 ---
 
 The `file` command identifies the type of a file by inspecting its content (not just the extension).  It is seful for detecting text vs binary files, scripts, executables, compressed archives, etc...
