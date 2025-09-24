@@ -184,6 +184,7 @@ tmux -S /tmp/shared_session_socket
 chmod 777 /tmp/shared_session_socket
 tmux server-access -a friend_username
 ```
+
 Your friend can then join with:
 
 ```bash

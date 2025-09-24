@@ -208,6 +208,47 @@ SSH can forward ports so you can securely access services on a remote machine (o
 
 1. **Local forwarding** (`-L`)  forward a local port to a remote address/port through the SSH server.
 2. **Remote forwarding** (`-R`)  forward a remote port to a local address/port.
+
+#### A little bit of theory
+
+Every service on a network is identified by two things:
+
+- An **IP address** (where the service is running)
+- A **Port number** (which service to connect to on that machine, more than one service could be served on a single address!)
+- 
+A **web server** is simply a service that provides files (like HTML pages) over the network. You can run a web server on your own laptop, choose an IP address (such as `localhost`), and a port (for example `12345`).
+
+Once it’s running, you can test it using 
+
+- `curl` (from the command line)
+- Your web browser.
+
+Let’s set up a minimal example.
+
+Write down `index.html` in a folder called `server`:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Website</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <p>This page is served by a Python web server.</p>
+</body>
+</html>
+```
+Go into `server` folder and start a python web server:
+
+```bash
+ python3 -m http.server -b 0.0.0.0 12345
+```
+
+Go to your browser and type: `localhost:12345`.
+Check that it is working also with: `curl localhost:12345`.
+
+Warning, using the brouwser could not work on WSL, let's discover together. 
 #### Local forwarding (`-L`)
 
 Forward remote service `localhost:8080` (on the remote machine) to your local port `8080`:
