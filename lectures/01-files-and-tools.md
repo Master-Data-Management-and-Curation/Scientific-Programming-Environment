@@ -194,6 +194,8 @@ Your friend can then join with:
 ```bash
 tmux -S /tmp/shared_session_socket
 ```
+
+**Note** this work in a shared machine, you can try this on ORFEO ! 
 ## Search for files and directories
 If you need to search for a specific file/folder, or an object that match some metadata, `find` is the right tool:
 
