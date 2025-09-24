@@ -466,7 +466,7 @@ chmod +x first.sh
 
 **Exercise:**
 * Check with `ls -l` if script is executable.
-* Remove executability: `chmod -x first.sh` and try to run it.
+* Remove executability: `chmod -x first.sh` and try to run it, check again with `ls -l`.
 * Verify which shell you are actually running, inspect the variable `$SHELL` in your current instance. (not always trustable).
 
 ---
