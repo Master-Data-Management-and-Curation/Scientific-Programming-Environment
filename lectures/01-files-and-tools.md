@@ -176,6 +176,9 @@ How do you keep its output accessible even after closing the shell? Use `tmux`:
 - Split the screen: `Ctrl+b "` or `Ctrl+b %`
 - Close a panel: `Ctrl+b x`
 - Scroll within a pane: `Ctrl+b [`
+- Move with `Ctrl+b <arrows>`
+
+**Exercise** Open a termina, launch `tmux` , split it in 4 quadrants, then move around .
 
 ### Share Your Terminal with Friends
 
@@ -313,4 +316,4 @@ Force kill if the process doesn’t respond:
 kill -9 <PID>
 ```
 
-
+**Exercise**: open a terminal and launch a `sleep 12345` process, let it running. Then open a new terminal and kill it ! Hint: `ps aux` + `grep` will help you. 
