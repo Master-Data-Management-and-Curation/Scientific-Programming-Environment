@@ -123,6 +123,7 @@ chown root:root /home/student01/projects/src
 chmod 600 /home/student01/projects/file1.txt
 chmod 600 /home/student01/projects/src/file2.txt
 chmod 600 /home/student01/projects/src/
+chmod 600 /home/student01/projects/
 echo "Setup complete. Log in as student01 to fix permissions."
 ```
 
