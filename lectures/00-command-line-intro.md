@@ -1,4 +1,3 @@
-
 # Unix and shell tutorial
 
 ## 0 - Survival Kit
@@ -608,7 +607,7 @@ Most important enviromental variables:
 Usually messing up with this varialbe could lead to broken interactive shell. It is not permanent, unless messing with them in your `.bashrc`.
 
 **Exercise** : 
-- try to break your interactive shell by corrupting PATH (not in the `.bashrch`)
+- try to break your interactive shell by corrupting PATH (not in the `.bashrc`)
 - try to personalize your shell using `PS1`variable
 ### History
 
