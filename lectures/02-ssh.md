@@ -76,7 +76,7 @@ To log in for the first time:
 ssh username@195.14.102.215
 ```
 
-By default, SSH looks in `~/.ssh` for your private key.
+By default, SSH looks in `~/.ssh` for your private ksource mysuperenv/bin/activateey.
 
 To specify a custom key:
 
@@ -148,7 +148,6 @@ To allow another key, simply add its **public key** as a new line in that file.
 **Warning:**  
 Do not overwrite or delete your existing key in `authorized_keys`, or you might lock yourself out!
 
-
 ---
 ### Copy files
 
@@ -194,7 +193,7 @@ scp my_file orfeo:/u/ipahome/yourusers/
 1. Copy a file from your laptop to ORFEO.
 2. Copy a file from ORFEO back to your laptop.
 3. Copy a directory recursively with `-r`.
-4. Try the same operations using the `orfeo` alias from your `~/.ssh/config`.
+4. Try the same operations using the `orfeo` alias defined in your `~/.ssh/config`.
 
 **Extra**: both source and destination can be remote, e.g.:
 ```bash
@@ -282,8 +281,13 @@ Now someone on the remote host can access `http://localhost:9000` and reach your
 
 **Note**: Remote forwarding can be restricted by the server’s SSH configuration (`GatewayPorts`, `AllowTcpForwarding`).
 
-**Exercise** start a local web server, as above, but in your machine, the check it correct functionality with `curl`/`wget`. 
+**Exercise** start a local web server, as above, but in your machine, the check it correct functionality with `curl`/`wget` from ORFEO login node. 
 
+**Advanced group exercise** : 
+Work in pairs to practice remote and local port forwarding.
+1. One student should start a local web server (or a jupyter notebook) on their laptop.
+2. That student must then use **remote port forwarding** to expose the server through **ORFEO**.
+3. The other student should set up **local port forwarding** so that requests from **ORFEO** are redirected to its own laptop.
 ---
 
 ### Practical example with forwarding - Jupyter notebook
@@ -291,8 +295,8 @@ Now someone on the remote host can access `http://localhost:9000` and reach your
 The goal is to have a jupyter notebook up and running on a remote machine (we will exploit ORFEO login node). And connect using our browser.
 
 **Tasks**:
-- Connect to ORFEO
-- Create a python virtual environment `python3 -m venv myenvironment`. On the next lectures we will depict this command.
+- Connect to **ORFEO** 
+- Create a python virtual environment `python3 -m venv myenvironment`. On the next lecture we will depict this command.
 - Activate the virtual env `source myenvironment/bin/activate`
 - Install jupyter lab `pip install jupyterlab`
 - Start a notebook with `jupyter lab`
@@ -306,7 +310,7 @@ The goal is to have a jupyter notebook up and running on a remote machine (we wi
 
 This link will not work on your laptop ! 
 You need to establish an SSH tunnel in order to reach port 8888 in the login node. 
-**Exercise**: do it as exercise ! 
+**Exercise**: do it as exercise.
 
 
 ---
@@ -321,7 +325,7 @@ SSH can **tunnel through an intermediate server** using the `-J` flag.
 ssh -J your_username@10.128.2.171 your_username@195.14.102.215
 ```
 
-- `youruser@195.14.102.215`  the jump/bastion server you can connect to directly.
+- `your_username@195.14.102.215`  the jump/bastion server you can connect to directly.
 - `your_username@10.128.2.171`  the final server you want to reach, in this case a compute node. 
 
 SSH automatically connects to the jump host and then forwards traffic to the target host.
