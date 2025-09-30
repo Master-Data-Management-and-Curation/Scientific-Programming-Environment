@@ -7,7 +7,7 @@ The `PATH` variable tells the system where to find executable programs. When you
 **Exercise**: Explore your `PATH` variable:
 
 ```bash
-from$ echo $PATH
+$ echo $PATH
 /home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
@@ -19,10 +19,15 @@ $ unset PATH
 If you issued the previous command, you current shell is probably broken, you need to close it and reopen in order to fix it. 
 ## Create and Install a Custom Command: `slowcat`
 
+*Prerequisite:* clone the repository in order to have the folder `code` to experiment:
+```bash
+git clone https://github.com/Master-Data-Management-and-Curation/Scientific-Programming-Environment.git
+```
+
 First, compile the `slowcat.c` file:
 
 ```bash
-$ curl -o slowcat.c "https://raw.githubusercontent.com/Master-Data-Management-and-Curation/Scientific-Programming-Environment/refs/heads/main/codes/01-compile/slowcat.c"
+$ cd Scientific-Programming-Environment/codes
 $ gcc slowcat.c -o slowcat
 $ file slowcat
 slowcat: ELF 64-bit LSB executable
@@ -59,7 +64,7 @@ Make this change permanent by adding it to your `.bashrc` file.
 $ echo "export PATH=$(pwd):$PATH >> ~/.bashrc"
 ```
 Or add with an editor `export PATH="/new/path/etc/:$PATH"`
-
+**Exercise**: install `slowcat` in your `.local/bin` folder, if not present create it in your home. Then add it to the `PATH`. 
 ### Easy
 
 - Use your system's package manager (e.g., `apt`, `dnf`).
@@ -71,8 +76,9 @@ Or add with an editor `export PATH="/new/path/etc/:$PATH"`
 
 ### Medium
 
-Download or copy precompiled binaries and hope they work. However, several issues can arise:
+Download or copy precompiled binaries and hope they work.
 
+However, several issues can arise:
 1. The binaries may be compiled for a different architecture, leading to incompatible CPU instructions.
 
     ```bash
@@ -84,7 +90,7 @@ Download or copy precompiled binaries and hope they work. However, several issue
 2. The binaries might depend on dynamic libraries that are missing, causing runtime errors.
     
     ```bash
-    $ cd codes/02-errors
+    $ cd codes/02-binaries
     $ ./missing_libraries
     ./missing_libraries.x: error while loading shared libraries: libmpi.so.40: cannot open shared object file: No such file or directory
     $ ldd missing_libraries
@@ -97,7 +103,7 @@ Download or copy precompiled binaries and hope they work. However, several issue
 3. **Risk of malware**: You could end up downloading malicious software. For example, running this fake version of nano:
    
     ```bash
-    $ cd codes/02-errors
+    $ cd codes/02-binaries
     $ ./nano
     ...
     ```
@@ -105,7 +111,7 @@ Download or copy precompiled binaries and hope they work. However, several issue
 4. If none of these issues occur, you might be lucky enough to have a *static* binary that runs without additional dependencies.
 
     ```bash
-    $ cd codes/02-errors
+    $ cd codes/02-binaries
     $ ./nano-static
     ```
 
@@ -168,12 +174,12 @@ $ sudo make install
 
 ## Advanced Exercises on software installation
 
-### Uninstall and Rebuild Nano
+### 1. Uninstall and Rebuild Nano
 
 Uninstall `nano` from your system, then rebuild and reinstall it from source.
 Here the source code: [git](https://savannah.gnu.org/git/?group=nano)
 
-### Introduction to HDF5 Files
+### 2. Introduction to HDF5 Files
 
 HDF5 is a binary file format designed for high-performance I/O operations. You will encounter it later in your studies. Since it is binary, a text editor won’t work to view its contents.
 
@@ -185,7 +191,7 @@ $ h5ls exercise.h5
 ExerciseSolved           Dataset {100, 100}
 ```
 
-### Building Your Own HDF5 Viewer Tool
+#### Building Your Own HDF5 Viewer Tool
 
 As an exercise, imagine that the required HDF5 tools are not available in your repository. Download and build the tools from source.
 
@@ -210,36 +216,56 @@ Depending on your system, you may need to install the following packages to comp
 sudo apt install build-essential autoconf automake autopoint pkgconf gettext libncurses-dev texinfo
 ```
 
-# Managing python environment
 
-## Install packages `pip`
-To installa python packages usually you will use `pip`. To install packages visible golgally, (e.g, to all user) you need administrator right. 
+---
 
-In a shared environment like a cluster you will install packages just for your user in a *local* path.
+# Managing Python Environment
 
+## Install packages with `pip`
+
+To install Python packages you usually use `pip`.  
+To install packages globally (i.e., visible to all users), you need administrator rights.
+
+In a shared environment, such as a cluster, you will typically install packages only for your user in a _local_ path.
 
 ## Environment concept
-Is possible to have different packages for different projects (for instance different version of `numpy`) thanks to environment. They could be implmemented by `conda`, `venv` or `virtualenv`.  Many other could be possible.
 
-Exploiting environment is a good practice to handle depdendencys
+It is possible to have different packages for different projects (for example, different versions of `numpy`) thanks to environments.  
+They can be implemented using tools like `conda`, `venv`, or `virtualenv`. Many other options exist as well.
+
+Using environments is good practice for handling dependencies.
+
 ## Virtual environment
 
-You can create virtual environment with built-in python `venv` module as follow:
+You can create a virtual environment with the built-in Python `venv` module as follows:
+
 ```bash
 python3 -m venv mysuperenv
 ```
-This command will create a folder called `mysuperenv` with inside all the necessary to run python3 and to installa additional libraries.
 
-And you can activate it with:
+This command creates a folder called `mysuperenv` containing everything needed to run Python 3 and install additional libraries.
+
+You can activate it with:
 
 ```bash
 source mysuperenv/bin/activate
 ```
 
-Your shell will notify the active environment prepenrding `(mysuperenv)` in your console ! 
+Your shell will indicate the active environment by prepending `(mysuperenv)` to your console prompt.
 
-All the subsequent command `pip install` will install inside the folder mysuperenv, will not affect your system.
+All subsequent `pip install` commands will install packages inside the `mysuperenv` folder and will not affect your system.
 
+## Managing dependencies with `requirements.txt`
 
-## Conda
+A common way to share or reproduce an environment is by using a `requirements.txt` file.
 
+- To install all packages listed in a `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+- To create a `requirements.txt` from your current environment:
+  ```bash
+    pip freeze > requirements.txt
+    ```
+
+This ensures that you or others can recreate the exact same environment later.
