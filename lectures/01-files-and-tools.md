@@ -157,45 +157,7 @@ You could use it to keep synced 2 directory using `--delete ` (dangerous) and sh
 
 **Exercise** try `rsync` to copy 2 folder.
 
-## Terminal Multiplexer `tmux`
 
-Suppose you have a script that runs indefinitely:
-
-```shell
-sleep 12345
-```
-
-How do you keep its output accessible even after closing the shell? Use `tmux`:
-
-1. Create a new session: `tmux new -s session_name`
-2. Run your script.
-3. Detach from the session: `Ctrl+b d`
-4. List active sessions: `tmux ls`
-5. Reattach to the session: `tmux attach -t session_name`
-### Bonus features:
-
-- Split the screen: `Ctrl+b "` or `Ctrl+b %`
-- Close a panel: `Ctrl+b x`
-- Scroll within a pane: `Ctrl+b [`
-- Move with `Ctrl+b <arrows>`
-
-**Exercise** Open a termina, launch `tmux` , split it in 4 quadrants, then move around .
-
-### Share Your Terminal with Friends
-
-```bash
-tmux -S /tmp/shared_session_socket
-chmod 777 /tmp/shared_session_socket
-tmux server-access -a friend_username
-```
-
-Your friend can then join with:
-
-```bash
-tmux -S /tmp/shared_session_socket
-```
-
-**Note** this work in a shared machine, you can try this on ORFEO ! 
 ## Search for files and directories
 If you need to search for a specific file/folder, or an object that match some metadata, `find` is the right tool:
 

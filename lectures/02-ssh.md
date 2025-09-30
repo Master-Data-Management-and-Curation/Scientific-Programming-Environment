@@ -201,6 +201,48 @@ scp user1@hostA:/path/to/file user2@hostB:/path/to/destination
 ```
 
 ---
+
+## Terminal Multiplexer `tmux`
+
+Suppose you have a script that runs indefinitely on a remote machine:
+
+```shell
+sleep 12345
+```
+
+How do you keep its output accessible even after closing the shell or after a connection loss ? 
+It's easy, use `tmux`:
+1. Create a new session: `tmux new -s session_name`
+2. Run your script.
+3. Detach from the session: `Ctrl+b d`
+4. List active sessions: `tmux ls`
+5. Reattach to the session: `tmux attach -t session_name`
+### Bonus features:
+
+- Split the screen: `Ctrl+b "` or `Ctrl+b %`
+- Close a panel: `Ctrl+b x`
+- Scroll within a pane: `Ctrl+b [`
+- Move with `Ctrl+b <arrows>`
+
+**Exercise** Open a termina, launch `tmux` , split it in 4 quadrants, then move around .
+
+### Share Your Terminal with Friends
+
+```bash
+tmux -S /tmp/shared_session_socket
+chmod 777 /tmp/shared_session_socket
+tmux server-access -a friend_username
+```
+
+Your friend can then join with:
+
+```bash
+tmux -S /tmp/shared_session_socket
+```
+
+**Note** this work in a shared machine, you can try this on ORFEO ! 
+
+---
 ### Forwarding
 
 SSH can forward ports so you can securely access services on a remote machine (or on your local machine) that are otherwise unreachable. There are two common types of forwarding:
