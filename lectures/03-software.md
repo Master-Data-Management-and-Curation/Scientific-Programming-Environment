@@ -179,6 +179,17 @@ $ sudo make install
 Uninstall `nano` from your system, then rebuild and reinstall it from source.
 Here the source code: [git](https://savannah.gnu.org/git/?group=nano)
 
+Alternatively you can download the source code from this url as compressed archive:
+
+```bash
+wget https://www.nano-editor.org/dist/v8/nano-8.6.tar.gz
+```
+
+Then you can extract this:
+
+```bash
+tar -xvf nano-x.y.tar.gz
+```
 ### 2. Introduction to HDF5 Files
 
 HDF5 is a binary file format designed for high-performance I/O operations. You will encounter it later in your studies. Since it is binary, a text editor won’t work to view its contents.
