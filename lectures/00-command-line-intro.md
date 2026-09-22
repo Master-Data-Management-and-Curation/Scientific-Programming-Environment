@@ -44,8 +44,10 @@
 
   ```bash
   pwd
-  ``**
+  ```
+
 *hint*: to discover the absolute path, you can use the command `realpath`.
+
 **Exercise 1**: discover what `cd` without any argument and flag does.
 
 ---
