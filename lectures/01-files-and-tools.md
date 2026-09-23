@@ -209,14 +209,14 @@ Two common tools for downloading files in the terminal are **`wget`** and **`cur
 **Example**: Download a single file
 
 ```bash
-wget https://example.com/file.zip
+wget https://orfeo-doc.areasciencepark.it/assets/images/gcc.png
 ```
 
 **Options**
 - `-O <filename>`  save with a custom filename:
 
 ```bash
-wget -O my_file.zip https://example.com/file.zip
+wget -O my_file.zip https://orfeo-doc.areasciencepark.it/assets/images/gcc.png
 ```
 
 - `-r -np -k` - Download a website recursively:
@@ -233,18 +233,11 @@ wget -r -np -k https://example.com/subpage/
 **Example: Download a file**
 
 ```bash
-curl -O https://example.com/file.zip
+curl -O https://orfeo-doc.areasciencepark.it/assets/images/gcc.png
 ```
 
 (`-O` keeps the original filename; `-o <filename>` sets a custom one.)
 
-**Other useful options**
-
-- `-L` - Follow redirects:
-
-```bash
-curl -L -O https://example.com/redirected_file.zip
-```
 
 **Exercise 6** on downloading:
 
