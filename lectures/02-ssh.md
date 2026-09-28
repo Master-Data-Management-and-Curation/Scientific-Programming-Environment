@@ -163,22 +163,22 @@ Either `source`, `destination`, or both can be remote. Use the format `user@host
 
 Copy a local file to Orfeo:
 ```bash
-scp my_file username@195.14.102.215:/u/ipahome/yourusers/
+scp my_file username@195.14.102.215:/u/mdmc/yourusers/
 ```
 
 Copy a whole directory (recursive):
 ```bash
-scp -r my_folder username@195.14.102.215:/u/ipahome/yourusers/
+scp -r my_folder username@195.14.102.215:/u/mdmc/yourusers/
 ```
 
 Use a specific identity key:
 ```bash
-scp -i /path/to/private_key my_file username@195.14.102.215:/u/ipahome/yourusers/
+scp -i /path/to/private_key my_file username@195.14.102.215:/u/mdmc/yourusers/
 ```
 
 Use the `Host` alias from your `~/.ssh/config`:
 ```bash
-scp my_file orfeo:/u/ipahome/yourusers/
+scp my_file orfeo:/u/mdmc/yourusers/
 ```
 **Useful options**
 - `-r` : copy directories recursively.
@@ -309,6 +309,7 @@ ssh -f -N -L 5432:localhost:5432 username@195.14.102.215
 ```
 
 **Exercise 8** once you have run this in background, test if it is working and then use `ps` and `kill` to terminate the process.
+
 #### Remote forwarding (`-R`)
 
 Forward a port on the remote server back to your local machine. Useful if you want the remote host (or people on it) to access a service running on your laptop.
@@ -332,32 +333,6 @@ Practice remote and local port forwarding.
 3. The other student should set up **local port forwarding** so that requests from **ORFEO** are redirected to its own laptop.
 ---
 
-### Practical example with forwarding - Jupyter notebook
-
-The goal is to have a jupyter notebook up and running on a remote machine (we will exploit ORFEO login node). And connect using our browser.
-
-**Tasks**:
-- Connect to **ORFEO**
-- Create a python virtual environment `python3 -m venv myenvironment`. On the next lecture we will depict this command.
-- Activate the virtual env `source myenvironment/bin/activate`
-- Install jupyter lab `pip install jupyterlab`
-- Start a notebook with `jupyter lab`
-- Then a link should appear:
-  ```bash
-     To access the server, open this file in a browser:
-        ...
-    Or copy and paste one of these URLs:
-        http://localhost:8888/lab?token=d3a866986d6437731ca2d758a674da599d
-        http://127.0.0.1:8888/lab?token=d3a866986d6437731ca2d758a674da599d  
-```
-
-This link will not work on your laptop !
-You need to establish an SSH tunnel in order to reach port 8888 in the login node.
-**Exercise 11**: do it as an exercise.
-
-
----
-
 ## SSH Jump Host (`-J`)
 
 Sometimes, the machine you want to reach is **not directly accessible** from your local computer. It may be behind a firewall or only reachable from another machine (the **jump host** or **bastion host**).
@@ -365,11 +340,11 @@ Sometimes, the machine you want to reach is **not directly accessible** from you
 SSH can **tunnel through an intermediate server** using the `-J` flag.
 
 ```bash
-ssh -J your_username@10.128.2.171 your_username@195.14.102.215
+ssh -J root@10.128.12.XXXX your_username@195.14.102.215
 ```
 
 - `your_username@195.14.102.215`  the jump/bastion server you can connect to directly.
-- `your_username@10.128.2.171`  the final server you want to reach, in this case a compute node.
+- `root@10.128.12.XXXX`  the final server you want to reach, in this case your VM.
 
 SSH automatically connects to the jump host and then forwards traffic to the target host.
 
@@ -382,9 +357,9 @@ SSH automatically connects to the jump host and then forwards traffic to the tar
 You can simplify it in `~/.ssh/config`:
 
 ```text
-Host compute_node
-  HostName 10.128.2.171
-  User your_username
+Host orfeo_vm
+  HostName 10.128.12.XXXX
+  User root
   IdentityFile ~/.ssh/id_rsa
   ProxyJump orfeo
 ```
@@ -392,13 +367,40 @@ Host compute_node
 Now you can just run:
 
 ```bash
-ssh compute_node
+ssh orfeo_vm
 ```
 
 and SSH will automatically use the jump host.
 
-**Exercise 12 (jump hosts):**
+**Exercise 11 (jump hosts):**
 1. Add a `ProxyJump orfeo` entry for your dedicated VM in `~/.ssh/config` and connect with a single command.
 2. Observe the route your connection takes by running the same command with `-vvv` and looking for the jump host in the debug output.
 3. (Optional) If you have two machines you can reach, practice `ssh -J` as a one-liner without the config file.
+
+### Practical example with forwarding - Jupyter notebook
+
+The goal is to have a jupyter notebook up and running on a remote machine (we will exploit ORFEO login node). And connect using our browser.
+
+**Tasks**:
+- Connect to your VM in **ORFEO**
+- Create a python virtual environment `python3 -m venv myenvironment`. On the next lecture we will depict this command.
+- Activate the virtual env `source myenvironment/bin/activate`
+- Install jupyter lab `pip install jupyterlab`
+- Start a notebook with `jupyter lab`
+- Then a link should appear:
+
+```bash
+     To access the server, open this file in a browser:
+        ...
+    Or copy and paste one of these URLs:
+        http://localhost:8888/lab?token=d3a866986d6437731ca2d758a674da599d
+        http://127.0.0.1:8888/lab?token=d3a866986d6437731ca2d758a674da599d
+```
+
+This link will not work on your laptop !
+You need to establish an SSH tunnel in order to reach port 8888 in your VM.
+
+**Exercise 12**: do it as an exercise.
+
+---
 
