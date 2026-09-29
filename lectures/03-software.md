@@ -238,7 +238,128 @@ sudo apt install build-essential autoconf automake autopoint pkgconf gettext lib
 
 ---
 
-## Managing Python Environment
+## Managing `python` environments
+
+In the following section, we illustrate various approaches for managing scientific software within a Python-based environment to prevent the scenario depicted in the figure below.
+
+!["https://xkcd.com/1987"](..//assets/python-env.png  "https://xkcd.com/1987")
+
+### Conda
+
+
+####  Installation
+
+Retrieve the most recent conda installer and execute it:
+
+```bash
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+$ bash Miniconda3-latest-Linux-x86_64.sh
+```
+And you can select the installation path:
+
+```bash
+
+    Miniconda3 will now be installed into this location:
+    /u/group/user//miniconda3
+
+    - Press ENTER to confirm the location
+    - Press CTRL-C to abort the installation
+    - Or specify a different location below
+
+    [/u/group/user//miniconda3] >>> /u/group/user/scratch/miniconda
+  PREFIX=/u/group/user/scratch/miniconda
+
+```
+**Note**:a fter the installation your `.bashrc` will be modified in order to have conda command available and by default `base` env is activated. Automatically loading the `base` env **can slow down your login procedure**, so disable it: `conda config --set auto_activate_base false`. Setting this flag to `false` can significantly speedup your login.
+
+If you select to not auto-activate conda you will see the following prompt:
+
+```
+You have chosen to not have conda modify your shell scripts at all.
+To activate conda's base environment in your current shell session:
+
+eval "$(/u/group/user/scratch/miniconda3/bin/conda shell.YOUR_SHELL_NAME hook)"
+
+To install conda's shell functions for easier access, first activate, then:
+
+conda init
+
+Thank you for installing Miniconda3!
+```
+
+The default shell in orfeo is `bash` so the command to activate and init the base environment is:
+
+```
+eval "$(/u/group/user/scratch/miniconda3/bin/conda shell.bash hook)"
+conda init
+```
+
+
+### Python `virtualenv`
+
+Instead of using conda, you have the option to utilize virtual environments to manage your Python packages without affecting your main workspace.
+Two main implementation are available:
+
+- [Official `virtualenv` docs](https://virtualenv.pypa.io/en/latest/)
+
+- [Official `venv` docs](https://docs.python.org/3/library/venv.html)
+
+
+The workflow is similar to the one of conda:
+
+1.  Create an environment
+2.  Activate the environment
+3.  Install packages and work within it
+4.  Deactivate the environment
+
+### Creation
+
+To create a new environment:
+```
+python3 -m virtualenv mySuperEnv
+```
+
+###  *[de]* activation
+
+```
+$ ls
+mySuperEnv
+$ source mySuperEnv/bin/activate
+(mySuperEnv)$
+... some work ...
+... some pip install ...
+(mySuperEnv)$ deactivate
+$
+
+```
+!!! Info "Python version"
+    *Note*: The Python version within the virtual environment is identical to the one used for its creation.
+
+### Python version
+
+Yes but: *"conda let me choose the python version"*
+
+```
+$ wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
+$ tar -xzf Python-3.8.0.tgz
+$ cd Python-3.8.0/
+$ ./configure --enable-optimizations CC="gcc -pthread" CXX="g++ -pthread"
+$ make -j 24
+```
+
+ Create `virtualenv` with your favourite python version
+
+```
+$ python3 -m virtualenv --python="Python-3.8.0/python" mySuperEnv3.8
+$ source mySuperEnv3.8/bin/activate
+(mySuperEnv3.8) [user@epyc007 pyenv]$ python
+Python 3.8.0 (default, Jan 15 2024, 12:07:47)
+[GCC 12.2.1 20221121 (Red Hat 12.2.1-4)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+[](../)
 
 ## Install packages with `pip`
 
@@ -247,47 +368,6 @@ To install packages globally (i.e., visible to all users), you need administrato
 
 In a shared environment, such as a cluster, you will typically install packages only for your user in a _local_ path.
 
-## Environment concept
-
-It is possible to have different packages for different projects (for example, different versions of `numpy`) thanks to environments.
-They can be implemented using tools like `conda`, `venv`, or `virtualenv`. Many other options exist as well.
-
-Using environments is good practice for handling dependencies.
-
-## Virtual environment
-
-You can create a virtual environment with the built-in Python `venv` module as follows:
-
-```bash
-python3 -m venv mysuperenv
-```
-
-This command creates a folder called `mysuperenv` containing everything needed to run Python 3 and install additional libraries.
-
-You can activate it with:
-
-```bash
-source mysuperenv/bin/activate
-```
-
-Your shell will indicate the active environment by prepending `(mysuperenv)` to your console prompt.
-
-All subsequent `pip install` commands will install packages inside the `mysuperenv` folder and will not affect your system.
-
-## Managing dependencies with `requirements.txt`
-
-A common way to share or reproduce an environment is by using a `requirements.txt` file.
-
-- To install all packages listed in a `requirements.txt`:
-    ```bash
-    pip install -r requirements.txt
-    ```
-- To create a `requirements.txt` from your current environment:
-  ```bash
-    pip freeze > requirements.txt
-    ```
-
-This ensures that you or others can recreate the exact same environment later.
 
 **Exercise 8** (virtual environments):
 
