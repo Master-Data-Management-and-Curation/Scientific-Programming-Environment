@@ -294,6 +294,7 @@ eval "$(/u/group/user/scratch/miniconda3/bin/conda shell.bash hook)"
 conda init
 ```
 
+And to install packages is sufficient to `conda install numpy`.
 
 ### Python `virtualenv`
 
