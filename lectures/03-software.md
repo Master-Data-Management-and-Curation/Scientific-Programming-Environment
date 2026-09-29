@@ -252,8 +252,8 @@ In the following section, we illustrate various approaches for managing scientif
 Retrieve the most recent conda installer and execute it:
 
 ```bash
-$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-$ bash Miniconda3-latest-Linux-x86_64.sh
+$ wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+$ bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 And you can select the installation path:
 
