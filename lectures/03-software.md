@@ -332,12 +332,11 @@ $ source mySuperEnv/bin/activate
 $
 
 ```
-!!! Info "Python version"
-    *Note*: The Python version within the virtual environment is identical to the one used for its creation.
+*Note*: The Python version within the virtual environment is identical to the one used for its creation.
 
 ### Python version
 
-Yes but: *"conda let me choose the python version"*
+Yes but: *"conda let me choose the python version"*, conda allows you to do the following 'conda create -n  old_python python=3.9'.
 
 ```
 $ wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
