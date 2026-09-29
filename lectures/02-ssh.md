@@ -340,7 +340,7 @@ Sometimes, the machine you want to reach is **not directly accessible** from you
 SSH can **tunnel through an intermediate server** using the `-J` flag.
 
 ```bash
-ssh -J ubuntu@10.128.12.XXXX your_username@195.14.102.215
+ssh  ubuntu@10.128.12.XXXX -J your_username@195.14.102.215
 ```
 
 - `your_username@195.14.102.215`  the jump/bastion server you can connect to directly.
