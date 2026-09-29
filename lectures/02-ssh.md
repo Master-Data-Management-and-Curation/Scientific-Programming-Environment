@@ -340,11 +340,11 @@ Sometimes, the machine you want to reach is **not directly accessible** from you
 SSH can **tunnel through an intermediate server** using the `-J` flag.
 
 ```bash
-ssh -J root@10.128.12.XXXX your_username@195.14.102.215
+ssh -J ubuntu@10.128.12.XXXX your_username@195.14.102.215
 ```
 
 - `your_username@195.14.102.215`  the jump/bastion server you can connect to directly.
-- `root@10.128.12.XXXX`  the final server you want to reach, in this case your VM.
+- `ubuntu@10.128.12.XXXX`  the final server you want to reach, in this case your VM.
 
 SSH automatically connects to the jump host and then forwards traffic to the target host.
 
@@ -359,7 +359,7 @@ You can simplify it in `~/.ssh/config`:
 ```text
 Host orfeo_vm
   HostName 10.128.12.XXXX
-  User root
+  User ubuntu
   IdentityFile ~/.ssh/id_rsa
   ProxyJump orfeo
 ```
