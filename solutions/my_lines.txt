@@ -1,0 +1,7 @@
+#!/bin/bash
+    local file_to_check=$1
+    echo "No pattern provided"
+for pattern in "$@"; do
+    if [ -z $pattern ]; then
+        break
+    grep $pattern $input_file >> my_lines.txt
